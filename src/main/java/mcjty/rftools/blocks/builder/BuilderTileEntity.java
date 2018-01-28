@@ -45,6 +45,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ForgeChunkManager;
 import net.minecraftforge.common.IPlantable;
@@ -176,7 +177,9 @@ public class BuilderTileEntity extends GenericEnergyReceiverTileEntity implement
 
     public static FakePlayer getHarvester() {
         if (harvester == null) {
-            harvester = FakePlayerFactory.get(DimensionManager.getWorld(0), new GameProfile(new UUID(111, 333), "rftools_builder"));
+            WorldServer overworld = DimensionManager.getWorld(0);
+            if(overworld == null) throw new NullPointerException("overworld");
+            harvester = FakePlayerFactory.get(overworld, new GameProfile(new UUID(111, 333), "rftools_builder"));
         }
         return harvester;
     }
