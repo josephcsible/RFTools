@@ -99,6 +99,7 @@ public class ScanDataManager extends AbstractWorldData<ScanDataManager> {
             File dataDir = new File(((WorldServer) world).getChunkSaveLocation(), "rftoolsscans");
             dataDir.mkdirs();
             File file = new File(dataDir, "scan" + id);
+            Logging.log("Beginning of " + file.getAbsolutePath());
             if (file.exists()) {
                 try(DataInputStream datainputstream = new DataInputStream(new FileInputStream(file))) {
                     NBTTagCompound tag = CompressedStreamTools.readCompressed(datainputstream);
@@ -107,6 +108,7 @@ public class ScanDataManager extends AbstractWorldData<ScanDataManager> {
                     Logging.log("Error reading scan file for id: " + id);
                 }
             }
+            Logging.log("End of " + file.getAbsolutePath());
         }
         return scan;
     }
